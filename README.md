@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# nextExample
+
+A modern Next.js application showcasing authentication, task management, and theming capabilities.
+
+## Features
+
+- 🔐 Authentication with better-auth
+- 🎨 Dark/Light theme support
+- 🗃️ PostgreSQL database support with Kysely
+- 📁 File storage with MinIO
+- 🎯 Type-safe database operations
+- 🎨 Styled with Tailwind CSS and shadcn/ui
+
+## Prerequisites
+
+- Node.js 18+ 
+- PostgreSQL
+    - use a local docker-instance or use a free remote instance from [supabase](https://supabase.com)
+- MinIO server (for file storage)
+
+## Environment Variables
+
+copy the `.env.example` file to `.env` and fill in with your values.
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create Kysely database schema:
+
+```bash
+npm run generate-types-postgres
+```
+
+3. Run database migrations:
+
+```bash
+npm run migrate
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/ # Next.js app directory
+├── components/ # React components
+├── database/ # Database configuration and migrations
+├── lib/ # Utility functions and configurations
+└── middleware.ts # Authentication middleware
+```
 
-## Learn More
+## Authentication
 
-To learn more about Next.js, take a look at the following resources:
+The project uses `better-auth` for authentication. Protected routes are handled by the middleware, which redirects unauthenticated users to the sign-in page.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Styling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The project uses Tailwind CSS with shadcn/ui components. Theme configuration can be found in:
+- `tailwind.config.ts`
+- `src/app/globals.css`
 
-## Deploy on Vercel
+## Available Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run migrate` - Run database migrations
+- `npm run generate-types-postgres` - Generate TypeScript types for PostgreSQL
+- `npm run generate-types-sqlite` - Generate TypeScript types for SQLite
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
